@@ -2322,7 +2322,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, i, onPackageSelect }) =>
 );
 
 const PackagesSection: React.FC<PackagesSectionProps> = ({ onPackageSelect }) => {
-  const [showSpecificPackages, setShowSpecificPackages] = useState(false);
+  const [showSpecificPackages, _setShowSpecificPackages] = useState(false);
 
   const generalPackages = [
     PACKAGES_DATA.starter,
