@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <div className="h-screen flex flex-col bg-black text-white">
       <Routes>
         <Route path="/taskLanding" element={<TaskLandingPage/>} />
-        <Route path="/package" element={<PackageSelectionPage/>} />
+        <Route path="/" element={<PackageSelectionPage/>} />
         <Route
           path="/growadmindashboard"
           element={<GrowOnlyAdminDashboard />}
