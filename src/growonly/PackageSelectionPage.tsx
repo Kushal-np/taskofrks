@@ -127,11 +127,11 @@ const PACKAGES_DATA: Record<PackageType, PackageDetails> = {
     period: "one-time",
     description: "Perfect for testing the waters",
     features: [
-      "500 Instagram Followers",
-      "1,000 Post Likes",
-      "100% Verified Accounts",
-      "7-Day Delivery",
-      "Basic Analytics",
+      "200 followers per social media selected",
+      "200 Total likes scheme",
+      "100% Active accounts",
+      
+   
     ],
     followerOptions: [200],
     reachOptions: [
@@ -144,17 +144,14 @@ const PACKAGES_DATA: Record<PackageType, PackageDetails> = {
   intermediate: {
     id: 'intermediate',
     name: "Intermediate",
-    price: "₹2,499",
+    price: "₹1,500",
     originalPrice: "₹3,999",
     period: "one-time",
     description: "Most popular for creators",
     features: [
-      "2,000 Instagram Followers",
-      "5,000 Post Likes",
-      "100% Verified Accounts",
-      "3-Day Delivery",
-      "Advanced Analytics",
-      "Priority Support",
+      "500 followers per social media selected",
+      "500 total likes scheme",
+      "100% Active Accounts",
     ],
     followerOptions: [500],
     reachOptions: [
@@ -173,13 +170,10 @@ const PACKAGES_DATA: Record<PackageType, PackageDetails> = {
     period: "one-time",
     description: "For serious influencers",
     features: [
-      "5,000 Instagram Followers",
-      "15,000 Post Likes",
-      "100% Verified Accounts",
-      "24-Hour Delivery",
-      "Premium Analytics",
-      "Dedicated Manager",
-      "Custom Targeting",
+      "700 followers per social media selected",
+      "700 total likes scheme",
+      "100% Active Accounts",
+
     ],
     followerOptions: [700],
     reachOptions: [
