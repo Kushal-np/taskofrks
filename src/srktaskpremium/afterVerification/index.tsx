@@ -8,8 +8,7 @@ import {
   , Search, Crown, Coins, Info,
   Calendar, Share2,  
    RefreshCw, 
-  Trophy, Lock, Video, 
-  MessageCircle,
+  Trophy, Lock, 
    
   
   PenTool,
@@ -1511,7 +1510,7 @@ const AfterVerified: React.FC = () => {
   const [reviewingRejectedTask, setReviewingRejectedTask] = useState<RejectedTaskEntry | null>(null);
   const [notifications, setNotifications] = useState<Array<{ id: number; message: string; type: 'success' | 'error' | 'info' }>>([]);
   const [activeTasks, setActiveTasks] = useState<Task[]>([...followTasks, ...watchTasks, ...postTasks]);
-  const [profile, setProfile] = useState<UserProfile>(userProfile);
+  const [profile, _setProfile] = useState<UserProfile>(userProfile);
 const MobileMenu = () => (
   <>
     {/* Hamburger Button */}
@@ -4136,14 +4135,11 @@ const VideoPlayerModal = ({ task, onClose }: any) => {
       );
     }
 
-    const [socialLinks, setSocialLinks] = useState(profile.socialLinks);
-    const [isEditing, setIsEditing] = useState(false);
+    const [socialLinks, _setSocialLinks] = useState(profile.socialLinks);
+    console.log(socialLinks)
+    const [isEditing, _setIsEditing] = useState(false);
+    console.log(isEditing)
 
-    const handleSave = () => {
-      setProfile(prev => ({ ...prev, socialLinks }));
-      setIsEditing(false);
-      addNotification('Profile updated successfully', 'success');
-    };
 
     return (
       <div className="space-y-8">
@@ -4208,109 +4204,10 @@ const VideoPlayerModal = ({ task, onClose }: any) => {
             </GlassCard>
 
             {/* Social Media Links */}
-            <GlassCard>
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-white">Social Media Links</h3>
-                  {isEditing ? (
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setIsEditing(false)}
-                        className="px-4 py-2 text-zinc-400 hover:text-white transition-colors"
-                      >
-                        Cancel
-                      </button>
-                      <MagneticButton small onClick={handleSave}>
-                        Save Changes
-                      </MagneticButton>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors"
-                    >
-                      Edit Links
-                    </button>
-                  )}
-                </div>
 
-                <div className="space-y-4">
-                  {allPlatforms.map((p) => {
-                    const Icon = p.icon;
-                    return (
-                      <div key={p.platform} className="flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-xl bg-div-to-br ${p.gradient} flex items-center justify-center flex-shrink-0`}>
-                          <Icon size={20} className={p.platform === 'tiktok' ? 'text-white' : p.color} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium text-white">{p.name}</p>
-                          {isEditing ? (
-                            <input
-                              type="url"
-                              value={socialLinks[p.platform]}
-                              onChange={(e) => setSocialLinks({...socialLinks, [p.platform]: e.target.value})}
-                              placeholder={`Enter your ${p.name} profile URL`}
-                              className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent text-sm"
-                            />
-                          ) : (
-                            <p className="text-sm text-zinc-400 truncate">
-                              {socialLinks[p.platform] || 'Not linked yet'}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </GlassCard>
 
             {/* Custom Task Request (SRK Grow Only) */}
-            {hasPurchased && (
-              <GlassCard gradient="purple" className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-div-to-br from-purple-500/10 via-transparent to-pink-500/10" />
-                <div className="p-8 relative z-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-div-to-r from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                      <Ticket size={24} className="text-purple-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">Request Custom Task</h3>
-                      <p className="text-zinc-400">Available with SRK Grow Package</p>
-                    </div>
-                  </div>
-                  
-                  <p className="text-zinc-300 mb-6">
-                    Propose your own content for promotion. Our team will review and create custom tasks for you.
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    {[
-                      { icon: Video, label: 'Video Promotion' },
-                      { icon: Share2, label: 'Social Share' },
-                      { icon: Users, label: 'Followers Campaign' },
-                      { icon: MessageCircle, label: 'Content Review' },
-                    ].map((item, idx) => (
-                      <div key={idx} className="p-4 bg-white/5 rounded-xl">
-                        <item.icon size={20} className="text-purple-400 mb-2" />
-                        <p className="text-sm font-medium text-white">{item.label}</p>
-                      </div>
-                    ))}
-                  </div>
 
-                  <MagneticButton 
-                    onClick={() => setShowRequestModal(true)}
-                    variant="premium"
-                    className="w-full"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      <Sparkles size={16} />
-                      Request New Task
-                    </span>
-                  </MagneticButton>
-                </div>
-              </GlassCard>
-            )}
           </div>
 
           {/* Sidebar Stats */}

@@ -61,6 +61,75 @@ interface LeaderboardEntry {
   shares: number;
   referralCount: number;
 }
+interface AnalyticsData {
+  clicks: {
+    total: number;
+    daily: number;
+    weekly: number;
+    monthly: number;
+  };
+  posts: {
+    total: number;
+    completed: number;
+    target: number;
+    links: Array<{
+      id: string;
+      title: string;
+      clicks: number;
+      target: number;
+      completionRate: number;
+      platform: string;
+    }>;
+  };
+  videos: {
+    total: number;
+    completed: number;
+    target: number;
+    links: Array<{
+      id: string;
+      title: string;
+      views: number;
+      target: number;
+      completionRate: number;
+      platform: string;
+    }>;
+  };
+  features: {
+    follow: Array<{
+      id: string;
+      name: string;
+      type: 'channel' | 'page' | 'profile';
+      platform: string;
+      clicks: number;
+      target: number;
+      completionRate: number;
+    }>;
+    watch: Array<{
+      id: string;
+      title: string;
+      platform: string;
+      views: number;
+      target: number;
+      completionRate: number;
+    }>;
+    share: Array<{
+      id: string;
+      title: string;
+      platform: string;
+      shares: number;
+      target: number;
+      completionRate: number;
+    }>;
+    like: Array<{
+      id: string;
+      title: string;
+      platform: string;
+      likes: number;
+      target: number;
+      completionRate: number;
+    }>;
+  };
+}
 
 interface ReferralPackage {
   id: string;
@@ -83,10 +152,9 @@ interface UserProfile {
   pushNotifications: boolean;
 }
 
-type ViewId = 'dashboard' | 'referral' | 'mysales' | 'leaderboard' | 'payout' | 'profile' | 'srkbank';
 type ToastType = 'success' | 'error' | 'info';
 type CardVariant = 'neutral' | 'gold' | 'emerald' | 'violet' | 'blue' | 'rose' | 'cyan';
-
+type ViewId = 'dashboard' | 'referral' | 'mysales' | 'leaderboard' | 'payout' | 'profile' | 'srkbank' | 'analytics';
 interface NavItem {
   id: ViewId;
   label: string;
@@ -148,11 +216,183 @@ const MOCK_DASHBOARD_DATA: DashboardData = {
   wallet: convertToRupees(4890.50), 
   consistencyDays: 14 
 };
+const MOCK_ANALYTICS_DATA: AnalyticsData = {
+  clicks: {
+    total: 1250,
+    daily: 85,
+    weekly: 420,
+    monthly: 1250
+  },
+  posts: {
+    total: 4,
+    completed: 3,
+    target: 200,
+    links: [
+      {
+        id: 'post-1',
+        title: 'Instagram Post #1',
+        clicks: 65,
+        target: 50,
+        completionRate: 130,
+        platform: 'Instagram'
+      },
+      {
+        id: 'post-2',
+        title: 'Facebook Post #1',
+        clicks: 48,
+        target: 50,
+        completionRate: 96,
+        platform: 'Facebook'
+      },
+      {
+        id: 'post-3',
+        title: 'Twitter Post #1',
+        clicks: 72,
+        target: 50,
+        completionRate: 144,
+        platform: 'Twitter'
+      },
+      {
+        id: 'post-4',
+        title: 'LinkedIn Post #1',
+        clicks: 40,
+        target: 50,
+        completionRate: 80,
+        platform: 'LinkedIn'
+      }
+    ]
+  },
+  videos: {
+    total: 4,
+    completed: 2,
+    target: 200,
+    links: [
+      {
+        id: 'video-1',
+        title: 'YouTube Tutorial #1',
+        views: 85,
+        target: 50,
+        completionRate: 170,
+        platform: 'YouTube'
+      },
+      {
+        id: 'video-2',
+        title: 'TikTok Short #1',
+        views: 120,
+        target: 50,
+        completionRate: 240,
+        platform: 'TikTok'
+      },
+      {
+        id: 'video-3',
+        title: 'Instagram Reel #1',
+        views: 45,
+        target: 50,
+        completionRate: 90,
+        platform: 'Instagram'
+      },
+      {
+        id: 'video-4',
+        title: 'YouTube Short #1',
+        views: 60,
+        target: 50,
+        completionRate: 120,
+        platform: 'YouTube'
+      }
+    ]
+  },
+  features: {
+    follow: [
+      {
+        id: 'follow-1',
+        name: 'Tech Trends',
+        type: 'channel',
+        platform: 'YouTube',
+        clicks: 150,
+        target: 100,
+        completionRate: 150
+      },
+      {
+        id: 'follow-2',
+        name: 'Digital Marketing Pro',
+        type: 'page',
+        platform: 'Facebook',
+        clicks: 85,
+        target: 100,
+        completionRate: 85
+      },
+      {
+        id: 'follow-3',
+        name: '@webdevguru',
+        type: 'profile',
+        platform: 'Twitter',
+        clicks: 120,
+        target: 100,
+        completionRate: 120
+      }
+    ],
+    watch: [
+      {
+        id: 'watch-1',
+        title: 'Complete React Course',
+        platform: 'YouTube',
+        views: 250,
+        target: 300,
+        completionRate: 83.3
+      },
+      {
+        id: 'watch-2',
+        title: 'Marketing Masterclass',
+        platform: 'Vimeo',
+        views: 180,
+        target: 200,
+        completionRate: 90
+      }
+    ],
+    share: [
+      {
+        id: 'share-1',
+        title: 'AI Tools Guide',
+        platform: 'LinkedIn',
+        shares: 65,
+        target: 100,
+        completionRate: 65
+      },
+      {
+        id: 'share-2',
+        title: 'Success Story',
+        platform: 'Facebook',
+        shares: 120,
+        target: 150,
+        completionRate: 80
+      }
+    ],
+    like: [
+      {
+        id: 'like-1',
+        title: 'Motivational Quote',
+        platform: 'Instagram',
+        likes: 320,
+        target: 200,
+        completionRate: 160
+      },
+      {
+        id: 'like-2',
+        title: 'Product Launch',
+        platform: 'Twitter',
+        likes: 180,
+        target: 250,
+        completionRate: 72
+      }
+    ]
+  }
+};
+
 
 const MOCK_SALES_DATA: SalesData[] = [
   { 
     id: 'bronze', 
-    packageName: 'Bronze Access', 
+    packageName: 'Starter', 
     salesCount: 50, 
     price: convertToRupees(500), 
     customers: [
@@ -163,7 +403,7 @@ const MOCK_SALES_DATA: SalesData[] = [
   },
   { 
     id: 'silver', 
-    packageName: 'Silver Mastery', 
+    packageName: 'Intermediate', 
     salesCount: 15, 
     price: convertToRupees(1500), 
     customers: [
@@ -173,7 +413,7 @@ const MOCK_SALES_DATA: SalesData[] = [
   },
   { 
     id: 'gold', 
-    packageName: 'Gold Elite', 
+    packageName: 'Pro', 
     salesCount: 5, 
     price: convertToRupees(5000), 
     customers: [
@@ -205,7 +445,7 @@ const MOCK_LEADERBOARD: LeaderboardEntry[] = [
 const MOCK_REFERRAL_PACKAGES: ReferralPackage[] = [
   { 
     id: 'starter', 
-    name: 'Starter Access', 
+    name: 'Starter ', 
     description: 'Perfect for beginners.', 
     commission: '10%', 
     variant: 'blue',
@@ -214,7 +454,7 @@ const MOCK_REFERRAL_PACKAGES: ReferralPackage[] = [
   },
   { 
     id: 'intermediate', 
-    name: 'Pro Mastery', 
+    name: 'Intermediate', 
     description: 'Unlock advanced features.', 
     commission: '15%', 
     variant: 'violet',
@@ -223,7 +463,7 @@ const MOCK_REFERRAL_PACKAGES: ReferralPackage[] = [
   },
   { 
     id: 'pro', 
-    name: 'Elite Partner', 
+    name: 'Pro', 
     description: 'Exclusive benefits.', 
     commission: '20%', 
     variant: 'gold',
@@ -310,6 +550,8 @@ const MenuIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
     <line x1="3" y1="18" x2="21" y2="18"></line>
   </svg>
 );
+
+
 
 const XIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1662,7 +1904,7 @@ const GrowDashboard: React.FC = () => {
   const [payoutHistory, setPayoutHistory] = useState<Payout[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
   const currentTitle: string = useMemo(() => 
     navItems.find(item => item.id === currentView)?.label || 'Dashboard', 
     [currentView]
@@ -1695,6 +1937,7 @@ const GrowDashboard: React.FC = () => {
       setSalesData(MOCK_SALES_DATA);
       setLeaderboardData(MOCK_LEADERBOARD);
       setPayoutHistory(MOCK_PAYOUTS);
+      setAnalyticsData(MOCK_ANALYTICS_DATA);
       setIsLoading(false);
     }, 800);
     
@@ -1718,6 +1961,17 @@ const GrowDashboard: React.FC = () => {
     switch (currentView) {
       case 'dashboard':
         return <DashboardView data={dashboardData} showToast={showToast} />;
+        case 'analytics':
+  return analyticsData ? "null" : (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="rounded-2xl min-h-[140px] animate-pulse" style={{
+          background: 'rgba(20, 17, 14, 0.8)',
+          border: '1px solid rgba(225, 186, 115, 0.1)',
+        }} />
+      ))}
+    </div>
+  );
       case 'referral':
         return <ReferralView userId={MOCK_USER_PROFILE.userId} showToast={showToast} />;
       case 'mysales':

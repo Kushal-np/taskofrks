@@ -74,6 +74,33 @@ interface DashboardData extends AdminData {
   trends: TrendItem[];
 }
 
+// --- Verification Types ---
+interface VerificationItem {
+  id: string;
+  userId: string;
+  name: string;
+  email: string;
+  profilePhoto?: string;
+  kycDocument?: string;
+  refererName?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  submittedAt: string;
+  reviewedAt?: string;
+  rejectionReason?: string;
+}
+
+interface PaymentVerificationItem {
+  id: string;
+  userId: string;
+  fullName: string;
+  userEmail: string;
+  packageType: string;
+  postLinks?: string[];
+  amount: number;
+  submittedAt: string;
+  status: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
+}
 
 // --- Theme Configuration ---
 const THEME = {
@@ -147,6 +174,170 @@ const TASK_MONITORING_DATA: TaskMonitoringEntry[] = [
       twitter: { follow: { total: 1, completed: 1, status: 'Approved', link: 'twitter.com/lisa-tweet' }, video: { total: 8, completed: 6, status: 'In Review', link: '' }, post: { total: 20, completed: 18, status: 'Approved', link: 'twitter.com/lisa-tweet' } },
       tiktok: { follow: { total: 1, completed: 1, status: 'Approved', link: 'tiktok.com/@lisa-tok' }, video: { total: 20, completed: 18, status: 'Approved', link: 'tiktok.com/@lisa-tok' }, post: { total: 10, completed: 8, status: 'Pending', link: '' } },
     },
+  },
+];
+
+// --- Verification Mock Data ---
+const MOCK_AFFILIATE_VERIFICATION_DATA: VerificationItem[] = [
+  {
+    id: 'AV001',
+    userId: 'SR11Z0G',
+    name: 'Sara Ramirez',
+    email: 'sara@example.com',
+    profilePhoto: 'https://randomuser.me/api/portraits/women/32.jpg',
+    kycDocument: 'https://example.com/kyc/sara.pdf',
+    refererName: 'David Martinez',
+    status: 'pending',
+    submittedAt: '2025-10-29',
+  },
+  {
+    id: 'AV002',
+    userId: 'MG99X1F',
+    name: 'Michael Garcia',
+    email: 'michael@example.com',
+    profilePhoto: 'https://randomuser.me/api/portraits/men/42.jpg',
+    kycDocument: 'https://example.com/kyc/michael.pdf',
+    refererName: 'Lisa Taylor',
+    status: 'pending',
+    submittedAt: '2025-10-28',
+  },
+  {
+    id: 'AV003',
+    userId: 'AC32R7L',
+    name: 'Alex Chen',
+    email: 'alex@example.com',
+    profilePhoto: 'https://randomuser.me/api/portraits/men/22.jpg',
+    kycDocument: 'https://example.com/kyc/alex.pdf',
+    refererName: 'SRK Admin',
+    status: 'approved',
+    submittedAt: '2025-01-15',
+    reviewedAt: '2025-01-16',
+  },
+  {
+    id: 'AV004',
+    userId: 'DM18Y9P',
+    name: 'David Martinez',
+    email: 'david@example.com',
+    profilePhoto: 'https://randomuser.me/api/portraits/men/33.jpg',
+    kycDocument: 'https://example.com/kyc/david.pdf',
+    refererName: 'Alex Chen',
+    status: 'rejected',
+    submittedAt: '2025-10-27',
+    reviewedAt: '2025-10-28',
+    rejectionReason: 'KYC document photo is blurry and unreadable'
+  },
+];
+
+const MOCK_USER_VERIFICATION_DATA: VerificationItem[] = [
+  {
+    id: 'UV001',
+    userId: 'RS77Y2H',
+    name: 'Rachel Smith',
+    email: 'rachel@example.com',
+    kycDocument: 'https://example.com/kyc/rachel.pdf',
+    status: 'pending',
+    submittedAt: '2025-10-30',
+  },
+  {
+    id: 'UV002',
+    userId: 'EP40Q2K',
+    name: 'Emily Peterson',
+    email: 'emily@example.com',
+    kycDocument: 'https://example.com/kyc/emily.pdf',
+    status: 'rejected',
+    submittedAt: '2024-11-01',
+    reviewedAt: '2024-11-02',
+    rejectionReason: 'Document quality is poor, cannot verify details',
+  },
+  {
+    id: 'UV003',
+    userId: 'JK55T6A',
+    name: 'John Kim',
+    email: 'john@example.com',
+    kycDocument: 'https://example.com/kyc/john.pdf',
+    status: 'approved',
+    submittedAt: '2025-05-10',
+    reviewedAt: '2025-05-11',
+  },
+  {
+    id: 'UV004',
+    userId: 'LT66B8C',
+    name: 'Lisa Taylor',
+    email: 'lisa@example.com',
+    kycDocument: 'https://example.com/kyc/lisa.pdf',
+    status: 'pending',
+    submittedAt: '2025-10-29',
+  },
+];
+
+const MOCK_PAYMENT_VERIFICATION_DATA: PaymentVerificationItem[] = [
+  {
+    id: 'PV001',
+    userId: 'RS77Y2H',
+    fullName: 'Rachel Smith',
+    userEmail: 'rachel@example.com',
+    packageType: 'SRK Basic',
+    postLinks: [
+      'https://facebook.com/rachel/post1',
+      'https://facebook.com/rachel/post2',
+      'https://facebook.com/rachel/post3',
+      'https://facebook.com/rachel/post4'
+    ],
+    amount: 99.00,
+    submittedAt: '2025-10-30',
+    status: 'pending',
+  },
+  {
+    id: 'PV002',
+    userId: 'EP40Q2K',
+    fullName: 'Emily Peterson',
+    userEmail: 'emily@example.com',
+    packageType: 'SRK Prime',
+    postLinks: [
+      'https://instagram.com/emily/post1',
+      'https://instagram.com/emily/post2'
+    ],
+    amount: 199.00,
+    submittedAt: '2025-10-28',
+    status: 'pending',
+  },
+  {
+    id: 'PV003',
+    userId: 'SR11Z0G',
+    fullName: 'Sara Ramirez',
+    userEmail: 'sara@example.com',
+    packageType: 'SRK Basic',
+    postLinks: ['https://twitter.com/sara/tweet1'],
+    amount: 99.00,
+    submittedAt: '2025-10-29',
+    status: 'pending',
+  },
+  {
+    id: 'PV004',
+    userId: 'JK55T6A',
+    fullName: 'John Kim',
+    userEmail: 'john@example.com',
+    packageType: 'SRK Gold',
+    postLinks: [
+      'https://youtube.com/john/video1',
+      'https://youtube.com/john/video2',
+      'https://youtube.com/john/video3'
+    ],
+    amount: 249.00,
+    submittedAt: '2025-10-27',
+    status: 'approved',
+  },
+  {
+    id: 'PV005',
+    userId: 'MG99X1F',
+    fullName: 'Michael Garcia',
+    userEmail: 'michael@example.com',
+    packageType: 'SRK Prime',
+    postLinks: ['https://tiktok.com/@michael/video1'],
+    amount: 199.00,
+    submittedAt: '2025-10-26',
+    status: 'rejected',
+    rejectionReason: 'Payment screenshot does not match transaction ID'
   },
 ];
 
@@ -330,6 +521,262 @@ const FloatingParticles: React.FC = () => {
   );
 };
 
+// --- Modal Components ---
+interface DocumentViewerModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  documentUrl?: string;
+  profilePhoto?: string;
+}
+
+const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  title, 
+  documentUrl,
+  profilePhoto 
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-4xl w-full rounded-2xl bg-gradient-to-br from-[#1a1410] to-[#0a0705] border border-white/10 p-6"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-bold text-white">{title}</h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <span className="text-white">✕</span>
+          </button>
+        </div>
+        
+        <div className="space-y-6 max-h-[70vh] overflow-y-auto">
+          {profilePhoto && (
+            <div>
+              <h4 className="text-sm font-medium text-gray-400 mb-3">Profile Photo</h4>
+              <div className="relative w-48 h-48 rounded-lg overflow-hidden border border-white/10">
+                <img 
+                  src={profilePhoto} 
+                  alt="Profile" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          )}
+          
+          {documentUrl && (
+            <div>
+              <h4 className="text-sm font-medium text-gray-400 mb-3">KYC Document</h4>
+              <div className="border border-white/10 rounded-lg p-4 bg-black/30">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-white">Document Preview</p>
+                    <p className="text-sm text-gray-400">Click to view full document</p>
+                  </div>
+                  <a
+                    href={documentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-[#b68938]/20 text-[#e1ba73] rounded-lg hover:bg-[#b68938]/30 transition-colors"
+                  >
+                    View Full Document
+                  </a>
+                </div>
+                <div className="border border-white/10 rounded p-4 bg-black/50">
+                  <div className="text-center text-gray-500">
+                    <div className="text-4xl mb-2">📄</div>
+                    <p>KYC Document Preview</p>
+                    <p className="text-sm mt-1">Click "View Full Document" to see complete details</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+interface RejectionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (reason: string) => void;
+  title: string;
+}
+
+const RejectionModal: React.FC<RejectionModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onSubmit, 
+  title 
+}) => {
+  const [reason, setReason] = useState('');
+
+  const handleSubmit = () => {
+    if (reason.trim()) {
+      onSubmit(reason);
+      setReason('');
+      onClose();
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-md w-full rounded-2xl bg-gradient-to-br from-[#1a1410] to-[#0a0705] border border-white/10 p-6"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-bold text-white">{title}</h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <span className="text-white">✕</span>
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-400 mb-2">
+              Reason for Rejection *
+            </label>
+            <textarea
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              placeholder="Enter detailed reason for rejection..."
+              className="w-full h-32 bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b68938]/50 focus:border-transparent resize-none"
+            />
+          </div>
+          
+          <div className="flex justify-end gap-3 pt-4">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-white/5 text-white rounded-lg hover:bg-white/10 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={!reason.trim()}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                reason.trim()
+                  ? 'bg-rose-600 text-white hover:bg-rose-700'
+                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Submit Rejection
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+interface PostLinksModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  postLinks: string[];
+  userName: string;
+}
+
+const PostLinksModal: React.FC<PostLinksModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  postLinks, 
+  userName 
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-2xl w-full rounded-2xl bg-gradient-to-br from-[#1a1410] to-[#0a0705] border border-white/10 p-6"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-bold text-white">Post Links - {userName}</h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <span className="text-white">✕</span>
+          </button>
+        </div>
+        
+        <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+          {postLinks.map((link, index) => (
+            <div key={index} className="p-4 bg-black/30 rounded-lg border border-white/10">
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#b68938]/20 flex items-center justify-center text-[#e1ba73]">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm text-gray-400 mb-1">Post {index + 1}</p>
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 hover:underline break-all"
+                    >
+                      {link}
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 bg-white/5 text-white text-sm rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  View
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // --- Floating NavBar Component ---
 interface FloatingNavBarProps {
   activeView: string;
@@ -339,17 +786,20 @@ interface FloatingNavBarProps {
 const FloatingNavBar: React.FC<FloatingNavBarProps> = ({ activeView, setActiveView }) => {
   const { scrollY } = useScroll();
   
-  const navItems = useMemo(() => [
-    { id: 'global', label: 'Overview', icon: '🌐' },
-    { id: 'taskmonitoring', label: 'Tasks', icon: '📊' },
-    { id: 'privatetasks', label: 'Private', icon: '🎯' },
-    { id: 'userlist', label: 'Users', icon: '👥' },
-    { id: 'affiliatelist', label: 'Affiliates', icon: '🌟' },
-    { id: 'createuser', label: 'Create', icon: '➕' },
-    { id: 'payoutqueue', label: 'Payouts', icon: '💰' },
-    { id: 'paymentverify', label: 'Verify', icon: '✅' },
-    { id: 'trend', label: 'Trends', icon: '📈' },
-  ], []);
+ // In FloatingNavBar component, update the navItems array:
+const navItems = useMemo(() => [
+  { id: 'global', label: 'Overview', icon: '🌐' },
+  { id: 'affiliateverification', label: 'Affiliate Verify', icon: '👥' },
+  { id: 'userverification', label: 'User Verify', icon: '👤' },
+  { id: 'paymentverification', label: 'Payment Verify', icon: '💰' },
+  { id: 'taskmonitoring', label: 'Tasks', icon: '📊' },
+  { id: 'privatetasks', label: 'Private', icon: '🎯' },
+  { id: 'userlist', label: 'Users', icon: '👥' },
+  { id: 'affiliatelist', label: 'Affiliates', icon: '🌟' },
+  { id: 'createuser', label: 'Create', icon: '➕' },
+  { id: 'payoutqueue', label: 'Payouts', icon: '💰' },
+  { id: 'trend', label: 'Trends', icon: '📈' },
+], []);
 
   const navOpacity = useTransform(scrollY, [0, 100], [0, 1]);
   const navBlur = useTransform(scrollY, [0, 100], [0, 12]);
@@ -583,6 +1033,834 @@ const GlobalOverviewView: React.FC<GlobalOverviewViewProps> = ({ data }) => {
   );
 };
 
+// --- Affiliate Verification View ---
+interface AffiliateVerificationViewProps {
+  data: DashboardData;
+}
+
+const AffiliateVerificationView: React.FC<AffiliateVerificationViewProps> = () => {
+  const [affiliateData, setAffiliateData] = useState<VerificationItem[]>(MOCK_AFFILIATE_VERIFICATION_DATA);
+  const [documentViewerOpen, setDocumentViewerOpen] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<{url?: string; photo?: string; title: string} | null>(null);
+  const [rejectionModalOpen, setRejectionModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+
+  const handleApprove = (id: string) => {
+    setAffiliateData(prev => prev.map(item => 
+      item.id === id 
+        ? { 
+            ...item, 
+            status: 'approved' as const,
+            reviewedAt: new Date().toISOString().split('T')[0]
+          }
+        : item
+    ));
+    alert(`Affiliate ${id} approved successfully!`);
+  };
+
+  const handleReject = (id: string) => {
+    setSelectedItemId(id);
+    setRejectionModalOpen(true);
+  };
+
+  const handleRejectionSubmit = (reason: string) => {
+    if (selectedItemId) {
+      setAffiliateData(prev => prev.map(item => 
+        item.id === selectedItemId 
+          ? { 
+              ...item, 
+              status: 'rejected' as const,
+              rejectionReason: reason,
+              reviewedAt: new Date().toISOString().split('T')[0]
+            }
+          : item
+      ));
+      alert(`Affiliate ${selectedItemId} rejected with reason: ${reason}`);
+      setSelectedItemId(null);
+    }
+  };
+
+  const handleViewDocuments = (item: VerificationItem) => {
+    setSelectedDocument({
+      url: item.kycDocument,
+      photo: item.profilePhoto,
+      title: `${item.name}'s KYC Documents`
+    });
+    setDocumentViewerOpen(true);
+  };
+
+  const filteredData = affiliateData.filter(item => 
+    filterStatus === 'all' || item.status === filterStatus
+  );
+
+  const pendingCount = affiliateData.filter(item => item.status === 'pending').length;
+  const approvedCount = affiliateData.filter(item => item.status === 'approved').length;
+  const rejectedCount = affiliateData.filter(item => item.status === 'rejected').length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 sm:p-6 space-y-8"
+    >
+      <div>
+        <h1 className="text-4xl font-bold text-white">
+          <GradientText>Affiliate Verification</GradientText>
+        </h1>
+        <p className="text-gray-400 mt-2">Review and verify affiliate applications from SRK Portal</p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Pending Review</p>
+                <p className="text-3xl font-bold text-amber-400">{pendingCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+                <span className="text-2xl">⏳</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Approved</p>
+                <p className="text-3xl font-bold text-emerald-400">{approvedCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                <span className="text-2xl">✅</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Rejected</p>
+                <p className="text-3xl font-bold text-rose-400">{rejectedCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-rose-500/20 flex items-center justify-center">
+                <span className="text-2xl">❌</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+      </div>
+
+      <GlassCard>
+        <div className="p-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-white">Affiliate Applications</h3>
+              <p className="text-gray-400 text-sm">{filteredData.length} applications found</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <select
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm appearance-none pr-8"
+                >
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <span className="text-gray-400 text-xs">▼</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Affiliate ID</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Name & Email</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Referer Name</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Submitted Date</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Documents</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Status</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((item, index) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+                  >
+                    <td className="py-4 px-6">
+                      <code className="text-sm font-mono text-white group-hover:text-[#e1ba73] transition-colors">
+                        {item.userId}
+                      </code>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-3">
+                        {item.profilePhoto && (
+                          <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+                            <img 
+                              src={item.profilePhoto} 
+                              alt={item.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <p className="font-medium text-white">{item.name}</p>
+                          <p className="text-sm text-gray-400">{item.email}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <span className="text-white">{item.refererName || 'N/A'}</span>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div>
+                        <p className="text-white">{item.submittedAt}</p>
+                        {item.reviewedAt && (
+                          <p className="text-xs text-gray-400">Reviewed: {item.reviewedAt}</p>
+                        )}
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <button
+                        onClick={() => handleViewDocuments(item)}
+                        className="flex items-center gap-2 px-3 py-1 bg-white/5 text-white rounded-lg hover:bg-white/10 transition-colors"
+                      >
+                        <span>👁️</span>
+                        View Documents
+                      </button>
+                    </td>
+                    <td className="py-4 px-6">
+                      <StatusBadge status={item.status} />
+                      {item.rejectionReason && (
+                        <p className="text-xs text-rose-400 mt-1 max-w-xs">
+                          {item.rejectionReason}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex gap-2">
+                        {item.status === 'pending' && (
+                          <>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleApprove(item.id)}
+                              className="px-3 py-1 bg-emerald-600/20 text-emerald-300 rounded-lg hover:bg-emerald-600/30 transition-colors text-sm"
+                            >
+                              Approve
+                            </motion.button>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleReject(item.id)}
+                              className="px-3 py-1 bg-rose-600/20 text-rose-300 rounded-lg hover:bg-rose-600/30 transition-colors text-sm"
+                            >
+                              Reject
+                            </motion.button>
+                          </>
+                        )}
+                        {item.status !== 'pending' && (
+                          <span className="text-sm text-gray-400">Reviewed</span>
+                        )}
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </GlassCard>
+
+      <AnimatePresence>
+        {documentViewerOpen && selectedDocument && (
+          <DocumentViewerModal
+            isOpen={documentViewerOpen}
+            onClose={() => setDocumentViewerOpen(false)}
+            title={selectedDocument.title}
+            documentUrl={selectedDocument.url}
+            profilePhoto={selectedDocument.photo}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {rejectionModalOpen && (
+          <RejectionModal
+            isOpen={rejectionModalOpen}
+            onClose={() => setRejectionModalOpen(false)}
+            onSubmit={handleRejectionSubmit}
+            title="Reject Affiliate Application"
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// --- User Verification View ---
+interface UserVerificationViewProps {
+  data: DashboardData;
+}
+
+const UserVerificationView: React.FC<UserVerificationViewProps> = () => {
+  const [userData, setUserData] = useState<VerificationItem[]>(MOCK_USER_VERIFICATION_DATA);
+  const [documentViewerOpen, setDocumentViewerOpen] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<{url?: string; title: string} | null>(null);
+  const [rejectionModalOpen, setRejectionModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+
+  const handleApprove = (id: string) => {
+    setUserData(prev => prev.map(item => 
+      item.id === id 
+        ? { 
+            ...item, 
+            status: 'approved' as const,
+            reviewedAt: new Date().toISOString().split('T')[0]
+          }
+        : item
+    ));
+    alert(`User ${id} approved successfully!`);
+  };
+
+  const handleReject = (id: string) => {
+    setSelectedItemId(id);
+    setRejectionModalOpen(true);
+  };
+
+  const handleRejectionSubmit = (reason: string) => {
+    if (selectedItemId) {
+      setUserData(prev => prev.map(item => 
+        item.id === selectedItemId 
+          ? { 
+              ...item, 
+              status: 'rejected' as const,
+              rejectionReason: reason,
+              reviewedAt: new Date().toISOString().split('T')[0]
+            }
+          : item
+      ));
+      alert(`User ${selectedItemId} rejected with reason: ${reason}`);
+      setSelectedItemId(null);
+    }
+  };
+
+  const handleViewDocuments = (item: VerificationItem) => {
+    setSelectedDocument({
+      url: item.kycDocument,
+      title: `${item.name}'s KYC Document`
+    });
+    setDocumentViewerOpen(true);
+  };
+
+  const filteredData = userData.filter(item => 
+    filterStatus === 'all' || item.status === filterStatus
+  );
+
+  const pendingCount = userData.filter(item => item.status === 'pending').length;
+  const approvedCount = userData.filter(item => item.status === 'approved').length;
+  const rejectedCount = userData.filter(item => item.status === 'rejected').length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 sm:p-6 space-y-8"
+    >
+      <div>
+        <h1 className="text-4xl font-bold text-white">
+          <GradientText>User Verification</GradientText>
+        </h1>
+        <p className="text-gray-400 mt-2">Review and verify user KYC documents</p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Pending KYC</p>
+                <p className="text-3xl font-bold text-amber-400">{pendingCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+                <span className="text-2xl">📝</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Verified Users</p>
+                <p className="text-3xl font-bold text-emerald-400">{approvedCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                <span className="text-2xl">✅</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Rejected KYC</p>
+                <p className="text-3xl font-bold text-rose-400">{rejectedCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-rose-500/20 flex items-center justify-center">
+                <span className="text-2xl">❌</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+      </div>
+
+      <GlassCard>
+        <div className="p-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-white">User KYC Verification</h3>
+              <p className="text-gray-400 text-sm">{filteredData.length} users found</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <select
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm appearance-none pr-8"
+                >
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <span className="text-gray-400 text-xs">▼</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">User ID</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Name & Email</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Submitted Date</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">KYC Document</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Status</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((item, index) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+                  >
+                    <td className="py-4 px-6">
+                      <code className="text-sm font-mono text-white group-hover:text-[#e1ba73] transition-colors">
+                        {item.userId}
+                      </code>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div>
+                        <p className="font-medium text-white">{item.name}</p>
+                        <p className="text-sm text-gray-400">{item.email}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div>
+                        <p className="text-white">{item.submittedAt}</p>
+                        {item.reviewedAt && (
+                          <p className="text-xs text-gray-400">Reviewed: {item.reviewedAt}</p>
+                        )}
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <button
+                        onClick={() => handleViewDocuments(item)}
+                        className="flex items-center gap-2 px-3 py-1 bg-white/5 text-white rounded-lg hover:bg-white/10 transition-colors"
+                      >
+                        <span>👁️</span>
+                        View KYC
+                      </button>
+                    </td>
+                    <td className="py-4 px-6">
+                      <StatusBadge status={item.status} />
+                      {item.rejectionReason && (
+                        <p className="text-xs text-rose-400 mt-1 max-w-xs">
+                          {item.rejectionReason}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex gap-2">
+                        {item.status === 'pending' && (
+                          <>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleApprove(item.id)}
+                              className="px-3 py-1 bg-emerald-600/20 text-emerald-300 rounded-lg hover:bg-emerald-600/30 transition-colors text-sm"
+                            >
+                              Approve
+                            </motion.button>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleReject(item.id)}
+                              className="px-3 py-1 bg-rose-600/20 text-rose-300 rounded-lg hover:bg-rose-600/30 transition-colors text-sm"
+                            >
+                              Reject
+                            </motion.button>
+                          </>
+                        )}
+                        {item.status !== 'pending' && (
+                          <span className="text-sm text-gray-400">Reviewed</span>
+                        )}
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </GlassCard>
+
+      <AnimatePresence>
+        {documentViewerOpen && selectedDocument && (
+          <DocumentViewerModal
+            isOpen={documentViewerOpen}
+            onClose={() => setDocumentViewerOpen(false)}
+            title={selectedDocument.title}
+            documentUrl={selectedDocument.url}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {rejectionModalOpen && (
+          <RejectionModal
+            isOpen={rejectionModalOpen}
+            onClose={() => setRejectionModalOpen(false)}
+            onSubmit={handleRejectionSubmit}
+            title="Reject User Verification"
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// --- Payment Verification View ---
+interface PaymentVerificationViewProps {
+  data: DashboardData;
+}
+
+const PaymentVerificationView: React.FC<PaymentVerificationViewProps> = () => {
+  const [paymentData, setPaymentData] = useState<PaymentVerificationItem[]>(MOCK_PAYMENT_VERIFICATION_DATA);
+  const [postLinksModalOpen, setPostLinksModalOpen] = useState(false);
+  const [selectedPostLinks, setSelectedPostLinks] = useState<string[]>([]);
+  const [selectedUserName, setSelectedUserName] = useState('');
+  const [rejectionModalOpen, setRejectionModalOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+
+  const handleApprove = (id: string) => {
+    setPaymentData(prev => prev.map(item => 
+      item.id === id 
+        ? { 
+            ...item, 
+            status: 'approved' as const,
+          }
+        : item
+    ));
+    alert(`Payment ${id} approved successfully!`);
+  };
+
+  const handleReject = (id: string) => {
+    setSelectedItemId(id);
+    setRejectionModalOpen(true);
+  };
+
+  const handleRejectionSubmit = (reason: string) => {
+    if (selectedItemId) {
+      setPaymentData(prev => prev.map(item => 
+        item.id === selectedItemId 
+          ? { 
+              ...item, 
+              status: 'rejected' as const,
+              rejectionReason: reason,
+            }
+          : item
+      ));
+      alert(`Payment ${selectedItemId} rejected with reason: ${reason}`);
+      setSelectedItemId(null);
+    }
+  };
+
+  const handleViewPostLinks = (item: PaymentVerificationItem) => {
+    setSelectedPostLinks(item.postLinks || []);
+    setSelectedUserName(item.fullName);
+    setPostLinksModalOpen(true);
+  };
+
+  const filteredData = paymentData.filter(item => 
+    filterStatus === 'all' || item.status === filterStatus
+  );
+
+  const pendingAmount = paymentData
+    .filter(item => item.status === 'pending')
+    .reduce((sum, item) => sum + item.amount, 0);
+
+  const totalAmount = paymentData.reduce((sum, item) => sum + item.amount, 0);
+
+  const pendingCount = paymentData.filter(item => item.status === 'pending').length;
+  const approvedCount = paymentData.filter(item => item.status === 'approved').length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 sm:p-6 space-y-8"
+    >
+      <div>
+        <h1 className="text-4xl font-bold text-white">
+          <GradientText>Payment Verification</GradientText>
+        </h1>
+        <p className="text-gray-400 mt-2">Verify package purchase requests and post links</p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Pending Payments</p>
+                <p className="text-3xl font-bold text-amber-400">{pendingCount}</p>
+                <p className="text-sm text-amber-300">₹{pendingAmount.toFixed(2)}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+                <span className="text-2xl">💰</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Approved Payments</p>
+                <p className="text-3xl font-bold text-emerald-400">{approvedCount}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                <span className="text-2xl">✅</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard>
+          <div className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Total Value</p>
+                <p className="text-3xl font-bold text-[#e1ba73]">₹{totalAmount.toFixed(2)}</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-[#b68938]/20 flex items-center justify-center">
+                <span className="text-2xl">💎</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+      </div>
+
+      <GlassCard>
+        <div className="p-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-white">Package Purchase Requests</h3>
+              <p className="text-gray-400 text-sm">{filteredData.length} requests found</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <select
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm appearance-none pr-8"
+                >
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <span className="text-gray-400 text-xs">▼</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Request ID</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">User Details</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Package Details</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Post Links</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Amount</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Status</th>
+                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((item, index) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+                  >
+                    <td className="py-4 px-6">
+                      <code className="text-sm font-mono text-white group-hover:text-[#e1ba73] transition-colors">
+                        {item.id}
+                      </code>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div>
+                        <p className="font-medium text-white">{item.fullName}</p>
+                        <p className="text-sm text-gray-400">{item.userEmail}</p>
+                        <p className="text-xs text-gray-500">{item.userId}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="px-3 py-2 bg-[#b68938]/10 text-[#e1ba73] rounded-lg">
+                        <p className="font-medium">{item.packageType}</p>
+                        <p className="text-xs text-gray-300">Submitted: {item.submittedAt}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <button
+                        onClick={() => handleViewPostLinks(item)}
+                        className="flex items-center gap-2 px-3 py-1 bg-white/5 text-white rounded-lg hover:bg-white/10 transition-colors"
+                      >
+                        <span>👁️</span>
+                        View Links ({item.postLinks?.length || 0})
+                      </button>
+                    </td>
+                    <td className="py-4 px-6">
+                      <motion.span 
+                        whileHover={{ scale: 1.1 }}
+                        className="text-2xl font-bold"
+                        style={{ color: THEME.colors.goldAccent }}
+                      >
+                        ₹{item.amount.toFixed(2)}
+                      </motion.span>
+                    </td>
+                    <td className="py-4 px-6">
+                      <StatusBadge status={item.status} />
+                      {item.rejectionReason && (
+                        <p className="text-xs text-rose-400 mt-1 max-w-xs">
+                          {item.rejectionReason}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex gap-2">
+                        {item.status === 'pending' && (
+                          <>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleApprove(item.id)}
+                              className="px-3 py-1 bg-emerald-600/20 text-emerald-300 rounded-lg hover:bg-emerald-600/30 transition-colors text-sm"
+                            >
+                              Approve
+                            </motion.button>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => handleReject(item.id)}
+                              className="px-3 py-1 bg-rose-600/20 text-rose-300 rounded-lg hover:bg-rose-600/30 transition-colors text-sm"
+                            >
+                              Reject
+                            </motion.button>
+                          </>
+                        )}
+                        {item.status !== 'pending' && (
+                          <span className="text-sm text-gray-400">Reviewed</span>
+                        )}
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </GlassCard>
+
+      <AnimatePresence>
+        {postLinksModalOpen && (
+          <PostLinksModal
+            isOpen={postLinksModalOpen}
+            onClose={() => setPostLinksModalOpen(false)}
+            postLinks={selectedPostLinks}
+            userName={selectedUserName}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {rejectionModalOpen && (
+          <RejectionModal
+            isOpen={rejectionModalOpen}
+            onClose={() => setRejectionModalOpen(false)}
+            onSubmit={handleRejectionSubmit}
+            title="Reject Payment Verification"
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// --- Existing Views (keeping original) ---
 interface TaskMonitoringViewProps {
   data: DashboardData;
 }
@@ -918,7 +2196,7 @@ const PrivateTasksView: React.FC<PrivateTasksViewProps> = ({ data }) => {
           transition={{ duration: 0.3 }}
           className="flex items-center gap-2"
         >
-          <span className="text-gray-400 text-sm">Sort by:</span>
+          <span className="text-sm text-gray-400">Sort by:</span>
           <div className="relative">
             <select
               value={sortBy}
@@ -959,7 +2237,7 @@ const PrivateTasksView: React.FC<PrivateTasksViewProps> = ({ data }) => {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className="border-b border-white/5 hover:bg-white/5 transition-colors"
+                      className="border-b border-white/5 hover:bg-white/5 transition-colors group"
                     >
                       <td className="py-4 px-6">
                         <div>
@@ -1490,94 +2768,6 @@ const PayoutQueueView: React.FC = () => {
   );
 };
 
-const PaymentVerificationView: React.FC = () => {
-  const handleVerify = useCallback((id: string) => {
-    alert(`Payment ${id} verified successfully! User will now receive their payment.`);
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className="p-4 sm:p-6 space-y-8"
-    >
-      <div>
-        <h1 className="text-4xl font-bold text-white">
-          <GradientText>Payment Verification</GradientText>
-        </h1>
-        <p className="text-gray-400 mt-2">Verify new package payments</p>
-      </div>
-
-      <GlassCard>
-        <div className="p-6">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Verification ID</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">User ID</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Package</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Amount (₹)</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Date</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Status</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-400">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockQueueData.paymentVerificationQueue.map((verification, index) => (
-                  <motion.tr
-                    key={verification.id}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
-                  >
-                    <td className="py-4 px-6">
-                      <code className="text-sm font-mono text-white group-hover:text-[#e1ba73] transition-colors">{verification.id}</code>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className="text-white">{verification.userId}</span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className="text-white font-medium">{verification.package}</span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <motion.span 
-                        whileHover={{ scale: 1.1 }}
-                        className="text-2xl font-bold"
-                        style={{ color: THEME.colors.goldAccent }}
-                      >
-                        ₹{verification.amount?.toFixed(2) || '0.00'}
-                      </motion.span>
-                    </td>
-                    <td className="py-4 px-6 text-gray-400">{verification.date}</td>
-                    <td className="py-4 px-6">
-                      <StatusBadge status={verification.status} />
-                    </td>
-                    <td className="py-4 px-6">
-                      <div className="flex gap-2">
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => handleVerify(verification.id)}
-                          className="px-4 py-2 bg-emerald-600/20 text-emerald-300 rounded-lg hover:bg-emerald-600/30 transition-colors text-sm"
-                        >
-                          Verify Payment
-                        </motion.button>
-                      </div>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </GlassCard>
-    </motion.div>
-  );
-};
-
 interface PerformanceTrendViewProps {
   data: DashboardData;
 }
@@ -1701,17 +2891,20 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, isMobile = false, onClose }) => {
-  const navItems = useMemo(() => [
-    { id: 'global', label: 'Global Overview', icon: '🌐' },
-    { id: 'taskmonitoring', label: 'Task Monitoring', icon: '📊' },
-    { id: 'privatetasks', label: 'Private Tasks', icon: '🎯' },
-    { id: 'userlist', label: 'All Users', icon: '👥' },
-    { id: 'affiliatelist', label: 'Affiliates Only', icon: '🌟' },
-    { id: 'createuser', label: 'Create User', icon: '➕' },
-    { id: 'payoutqueue', label: 'Payout Queue', icon: '💰' },
-    { id: 'paymentverify', label: 'Payment Verification', icon: '✅' },
-    { id: 'trend', label: 'Performance Trends', icon: '📈' },
-  ], []);
+// In Sidebar component, update the navItems array:
+const navItems = useMemo(() => [
+  { id: 'global', label: 'Global Overview', icon: '🌐' },
+  { id: 'affiliateverification', label: 'Affiliate Verification', icon: '👥' },
+  { id: 'userverification', label: 'User Verification', icon: '👤' },
+  { id: 'paymentverification', label: 'Payment Verification', icon: '💰' },
+  { id: 'taskmonitoring', label: 'Task Monitoring', icon: '📊' },
+  { id: 'privatetasks', label: 'Private Tasks', icon: '🎯' },
+  { id: 'userlist', label: 'All Users', icon: '👥' },
+  { id: 'affiliatelist', label: 'Affiliates Only', icon: '🌟' },
+  { id: 'createuser', label: 'Create User', icon: '➕' },
+  { id: 'payoutqueue', label: 'Payout Queue', icon: '💰' },
+  { id: 'trend', label: 'Performance Trends', icon: '📈' },
+], []);
 
   const handleNavClick = useCallback((itemId: string) => {
     setActiveView(itemId);
@@ -1847,20 +3040,22 @@ const GrowOnlyAdminDashboard: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const renderView = useCallback(() => {
-    switch (activeView) {
-      case 'global': return <GlobalOverviewView data={data} />;
-      case 'taskmonitoring': return <TaskMonitoringView data={data} />;
-      case 'privatetasks': return <PrivateTasksView data={data} />;
-      case 'userlist': return <UserListView data={data} />;
-      case 'affiliatelist': return <AffiliateListView data={data} />;
-      case 'createuser': return <CreateUserView />;
-      case 'payoutqueue': return <PayoutQueueView />;
-      case 'paymentverify': return <PaymentVerificationView />;
-      case 'trend': return <PerformanceTrendView data={data} />;
-      default: return <GlobalOverviewView data={data} />;
-    }
-  }, [activeView, data]);
+const renderView = useCallback(() => {
+  switch (activeView) {
+    case 'global': return <GlobalOverviewView data={data} />;
+    case 'affiliateverification': return <AffiliateVerificationView data={data} />;
+    case 'userverification': return <UserVerificationView data={data} />;
+    case 'paymentverification': return <PaymentVerificationView data={data} />;
+    case 'taskmonitoring': return <TaskMonitoringView data={data} />;
+    case 'privatetasks': return <PrivateTasksView data={data} />;
+    case 'userlist': return <UserListView data={data} />;
+    case 'affiliatelist': return <AffiliateListView data={data} />;
+    case 'createuser': return <CreateUserView />;
+    case 'payoutqueue': return <PayoutQueueView />;
+    case 'trend': return <PerformanceTrendView data={data} />;
+    default: return <GlobalOverviewView data={data} />;
+  }
+}, [activeView, data]);
 
   const handleViewChange = useCallback((view: string) => {
     setActiveView(view);
@@ -1877,6 +3072,23 @@ const GrowOnlyAdminDashboard: React.FC = () => {
   const handleRefresh = useCallback(() => {
     window.location.reload();
   }, []);
+
+const getViewTitle = useCallback(() => {
+  switch (activeView) {
+    case 'global': return 'Global Overview';
+    case 'affiliateverification': return 'Affiliate Verification';
+    case 'userverification': return 'User Verification';
+    case 'paymentverification': return 'Payment Verification';
+    case 'taskmonitoring': return 'Task Monitoring';
+    case 'privatetasks': return 'Private Tasks';
+    case 'userlist': return 'All Users';
+    case 'affiliatelist': return 'Affiliates Only';
+    case 'createuser': return 'Create User';
+    case 'payoutqueue': return 'Payout Queue';
+    case 'trend': return 'Performance Trends';
+    default: return 'Dashboard';
+  }
+}, [activeView]);
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -1943,15 +3155,7 @@ const GrowOnlyAdminDashboard: React.FC = () => {
               </motion.button>
               <div>
                 <h2 className="text-xl font-bold text-white">
-                  {activeView === 'global' ? 'Global Overview' :
-                   activeView === 'taskmonitoring' ? 'Task Monitoring' :
-                   activeView === 'privatetasks' ? 'Private Tasks' :
-                   activeView === 'userlist' ? 'All Users' :
-                   activeView === 'affiliatelist' ? 'Affiliates Only' :
-                   activeView === 'createuser' ? 'Create User' :
-                   activeView === 'payoutqueue' ? 'Payout Queue' :
-                   activeView === 'paymentverify' ? 'Payment Verification' :
-                   activeView === 'trend' ? 'Performance Trends' : 'Dashboard'}
+                  {getViewTitle()}
                 </h2>
                 <p className="text-sm text-gray-400">
                   Last updated: Today, 2:45 PM
