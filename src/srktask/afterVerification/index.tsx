@@ -522,7 +522,7 @@ const followTasks: Task[] = [
     type: 'follow', 
     platform: 'youtube', 
     username: '@SRKUniversity', 
-    coins: 150, 
+    coins: 100, 
     desc: 'Subscribe to official YouTube channel and stay subscribed for 7 days', 
     title: 'Subscribe Channel',
     status: 'pending',
@@ -2147,7 +2147,7 @@ const MobileMenu = () => (
         {/* Bento Grid Analytics */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div className="md:col-span-2">
-            <StatCard title="Total Coins" value={analyticsData.totalCoins} icon={Wallet} change={12.5} gradient="gold" />
+            <StatCard title="Wallet Coins" value={analyticsData.totalCoins} icon={Wallet} change={12.5} gradient="gold" />
           </div>
           <div>
             <StatCard title="Today" value={analyticsData.today} icon={Activity} change={8.2} gradient="blue" />
@@ -4020,7 +4020,7 @@ const VideoPlayerModal = ({ task, onClose }: any) => {
                 <h4 className="text-lg font-bold text-white mb-4">Your Balance</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-zinc-400">Total Coins:</span>
+                    <span className="text-zinc-400">Wallet Coins:</span>
                     <div className="flex items-center gap-2">
                       <Coins size={16} className="text-amber-400" />
                       <span className="text-white font-bold">{balance.toLocaleString()}</span>

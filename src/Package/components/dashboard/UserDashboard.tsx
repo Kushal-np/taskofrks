@@ -176,7 +176,6 @@ const UserDashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               ID: {user.id.slice(0, 8)}...
             </div>
             <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-[#b68938] to-[#e1ba73] flex items-center justify-center text-black font-bold text-lg md:text-xl">
-              {user.name.charAt(0).toUpperCase()}
             </div>
           </div>
         </header>

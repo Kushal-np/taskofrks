@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import TaskLandingPage from "./srktaskpremium/Task";
+import TaskLandingPage from "./srktask/Task";
 import GrowOnlyAdminDashboard from "./growonly/GrowOnlyAdminDashboard";
 import GrowDashboard from "./growonly/GrowDashboard";
-import AfterVerified from "./srktaskpremium/afterVerification";
-import Dashboard from "./srktaskpremium/Dashboard/Dashboard";
-import TaskVerificationPage from "./srktaskpremium/TaskVerification";
+import AfterVerified from "./srktask/afterVerification";
+import Dashboard from "./srktask/Dashboard/Dashboard";
+import TaskVerificationPage from "./srktask/TaskVerification";
 import GrowVerificationPage from "./growonly/GrowVerification";
 import PackageSelectionPage from "./Package/App";
+import VerificationReviewPage from "./srktask/afterVerification/VerificationReviewPage";
 const App: React.FC = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/taskVerification" element={<TaskVerificationPage/>}/>
         <Route path="/growVerification" element={<GrowVerificationPage/>}/>
+        <Route path ="/underVerification" element={<VerificationReviewPage/>}/>
       </Routes>
     </div>
   );

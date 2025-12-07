@@ -37,26 +37,37 @@ const LoginModal: React.FC<LoginModalProps & { hasRegistered: boolean; onRegistr
     if (!modalRef.current?.contains(e.target)) onClose();
   };
 
-  const handleRegister = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+const handleRegister = async (e: FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
 
-    await new Promise((r) => setTimeout(r, 1200));
+  await new Promise((r) => setTimeout(r, 1200));
 
-    // Check if user already exists in memory
-    if (usersDatabase.some((u: UserData) => u.email === email)) {
-      alert("User already exists");
-      setLoading(false);
-      return;
-    }
-
-
-
-    // Store in memory only
-    
+  // Check if user already exists
+  if (usersDatabase.some((u) => u.email === email)) {
+    alert("User already exists");
     setLoading(false);
-    setRegistrationStatus('pending');
+    return;
+  }
+
+  // CREATE NEW USER AND SAVE TO MEMORY
+  const newUser: UserData = {
+    id: crypto.randomUUID(),
+    email,
+    password: hashPassword(password),
+    approved: false,
+    kycStatus: "pending",
+    createdAt: new Date().toISOString(),
+    lastLogin: "",
+    kycDocuments: kycFile ? [kycFile] : [],
   };
+
+  usersDatabase.push(newUser); // IMPORTANT ✔
+
+  setLoading(false);
+  setRegistrationStatus("pending");
+};
+
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
