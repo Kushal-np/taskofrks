@@ -9,6 +9,7 @@ import TaskVerificationPage from "./srktask/TaskVerification";
 import GrowVerificationPage from "./growonly/GrowVerification";
 import PackageSelectionPage from "./Package/App";
 import VerificationReviewPage from "./srktask/afterVerification/VerificationReviewPage";
+import UserDashboard from "./Package/components/dashboard/UserDashboard";
 const App: React.FC = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Route path="/taskVerification" element={<TaskVerificationPage/>}/>
         <Route path="/growVerification" element={<GrowVerificationPage/>}/>
         <Route path ="/underVerification" element={<VerificationReviewPage/>}/>
+        <Route path ="/userDashboard" element={<UserDashboard/>} /> 
       </Routes>
     </div>
   );
