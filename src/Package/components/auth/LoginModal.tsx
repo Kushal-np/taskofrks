@@ -50,17 +50,19 @@ const handleRegister = async (e: FormEvent) => {
     return;
   }
 
-  // CREATE NEW USER AND SAVE TO MEMORY
-  const newUser: UserData = {
-    id: crypto.randomUUID(),
-    email,
-    password: hashPassword(password),
-    approved: false,
-    kycStatus: "pending",
-    createdAt: new Date().toISOString(),
-    lastLogin: "",
-    kycDocuments: kycFile ? [kycFile] : [],
-  };
+const newUser: UserData = {
+  id: crypto.randomUUID(),
+  email,
+  password: hashPassword(password),
+  name: "",  // Add this
+  country: "",  // Add this
+  phone: 0,  // Add this
+  approved: false,
+  kycStatus: "pending",
+  createdAt: new Date().toISOString(),
+  lastLogin: "",
+  kycDocuments: kycFile ? [kycFile] : [],
+};
 
   usersDatabase.push(newUser); // IMPORTANT ✔
 
@@ -313,7 +315,7 @@ const handleRegister = async (e: FormEvent) => {
                           </motion.div>
                         </div>
 
-                        {user.kycDocuments && user.kycDocuments[0] && (
+                        {user.kycDocuments && user.kycDocuments.length > 0 && user.kycDocuments[0] && (
                           <div className="flex items-center gap-3 mb-4 text-xs bg-black/60 rounded-lg p-3 border border-[#b68938]/20">
                             <div className="p-2 bg-[#b68938]/20 rounded-lg">
                               <FileText className="w-5 h-5 text-[#e1ba73]" />

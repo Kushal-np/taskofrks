@@ -22,10 +22,10 @@ export interface UserData {
   password: string;
   name: string;
   kycStatus: 'pending' | 'approved' | 'rejected';
-  approved: boolean; // Add this line
-  country:string ; 
-  phone:number ; 
-  kycDocuments: File ; 
+  approved: boolean;
+  country: string;
+  phone: number;
+  kycDocuments: File[];  // Changed from File to File[]
   createdAt: string;
   lastLogin: string;
 }
