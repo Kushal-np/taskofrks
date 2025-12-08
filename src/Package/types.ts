@@ -25,14 +25,7 @@ export interface UserData {
   approved: boolean; // Add this line
   country:string ; 
   phone:number ; 
-  kycDocuments: {
-    id: string;
-    name: string;
-    size: number;
-    type: string;
-    status: 'pending' | 'approved' | 'rejected';
-    submittedAt: string;
-  }[];
+  kycDocuments: File ; 
   createdAt: string;
   lastLogin: string;
 }

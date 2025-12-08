@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 
 // Types
-type VerificationStatus = 'pending' | 'approved' | 'rejected' | 'processing';
 
 interface VerificationReviewPageProps {
   userEmail?: string;
@@ -21,7 +20,6 @@ interface VerificationReviewPageProps {
   status?: 'approved' | 'rejected' | 'processing' | 'pending';
   rejectionReason?: string;
   submittedDate?: string;
-  estimatedCompletion?: string;
 }
 
 // Reusable Components (copied from your theme)
@@ -127,12 +125,10 @@ const StatusBadge: React.FC<{ status: string; pulse?: boolean }> = ({ status, pu
 
 // Main Component
 const VerificationReviewPage: React.FC<VerificationReviewPageProps> = ({
-  userEmail = "Not Provided",
   expectedReviewTime = "N/A",
   status = 'processing',
   rejectionReason,
   submittedDate = new Date().toLocaleDateString(),
-  estimatedCompletion
 }) => {
   const [timeRemaining, setTimeRemaining] = useState<string>('');
   
