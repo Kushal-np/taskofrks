@@ -16,9 +16,9 @@ import {
 type VerificationStatus = 'pending' | 'approved' | 'rejected' | 'processing';
 
 interface VerificationReviewPageProps {
-  userEmail: string;
-  expectedReviewTime: string;
-  status?: VerificationStatus;
+  userEmail?: string;
+  expectedReviewTime?: string;
+  status?: 'approved' | 'rejected' | 'processing' | 'pending';
   rejectionReason?: string;
   submittedDate?: string;
   estimatedCompletion?: string;
@@ -127,8 +127,8 @@ const StatusBadge: React.FC<{ status: string; pulse?: boolean }> = ({ status, pu
 
 // Main Component
 const VerificationReviewPage: React.FC<VerificationReviewPageProps> = ({
-  userEmail,
-  expectedReviewTime,
+  userEmail = "Not Provided",
+  expectedReviewTime = "N/A",
   status = 'processing',
   rejectionReason,
   submittedDate = new Date().toLocaleDateString(),

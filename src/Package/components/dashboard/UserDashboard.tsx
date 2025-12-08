@@ -17,9 +17,13 @@ import {
   CheckCircle,
   Upload
 } from 'lucide-react';
-import type { DashboardProps, PlatformData } from '../../types';
+import type { PlatformData } from '../../types';
 
-const UserDashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
+interface UserDashboardProps {
+  onLogout?: () => void;
+}
+
+const UserDashboard: React.FC<UserDashboardProps> = ({  onLogout }) => {
   const [activeTab, setActiveTab] = useState<'analytics' | 'profile' | 'taskuploading'>('analytics');
   const [taskType, setTaskType] = useState<'post' | 'video'>('post');
   const [postUrl, setPostUrl] = useState('');
@@ -146,7 +150,7 @@ const UserDashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
 
         <div className="p-4 border-t border-white/10">
           <button
-            onClick={onLogout}
+            onClick={() => onLogout?.()}
             className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all group"
           >
             <LogOut size={24} className="group-hover:scale-110 transition-transform" />

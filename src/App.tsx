@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Route path="/taskVerification" element={<TaskVerificationPage/>}/>
         <Route path="/growVerification" element={<GrowVerificationPage/>}/>
         <Route path ="/underVerification" element={<VerificationReviewPage/>}/>
-        <Route path ="/userDashboard" element={<UserDashboard/>} /> 
+ <Route path="/userDashboard" element={<UserDashboard />} />
       </Routes>
     </div>
   );

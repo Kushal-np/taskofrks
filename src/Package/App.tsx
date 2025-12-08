@@ -141,7 +141,7 @@ const App: React.FC = () => {
           )}
 
           {view === 'dashboard' && user && (
-            <UserDashboard user={user} onLogout={handleLogout} />
+            <UserDashboard  onLogout={handleLogout} />
           )}
         </AnimatePresence>
       </main>
