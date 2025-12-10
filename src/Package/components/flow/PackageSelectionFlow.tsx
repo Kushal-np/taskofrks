@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield } from 'lucide-react';
-import type { PackageDetails, UserDetails, SocialPlatform, EngagementType, CheckoutUserDetails } from '../../types';
+import type { PackageDetails, UserDetails, SocialPlatform, EngagementType, CheckoutUserDetails, UserData } from '../../types';
 import EngagementOption from '../package/EngagementOption';
 import SelectOption from '../package/SelectOption';
 import SocialPlatformCard from '../package/SocialPlatformCard';
 import PaymentModal from '../payment/PaymentModal';
+import VerificationStatusComponent from './VerificationStatusBanner';
 
 interface PackageSelectionFlowProps {
   selectedPackage: PackageDetails;
   onComplete: (userDetails: UserDetails) => void;
   onBack: () => void;
+   user?: UserData | null; // add this
 }
 
 const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({ 
   selectedPackage, 
   onComplete, 
-  onBack 
+  onBack ,
+  user
 }) => {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [selectedPlatform, setSelectedPlatform] = useState<SocialPlatform | null>(null);
@@ -134,6 +137,18 @@ const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({
 
   return (
     <div className="min-h-screen bg-[#0a0705] text-white pt-32 px-6">
+
+<VerificationStatusComponent
+  status={
+    user?.kycStatus === 'rejected' ? 'rejected' : 
+    user?.kycStatus === 'approved' ? 'verified' : 
+    'pending'
+  }
+  userEmail={user?.email || 'guest@example.com'}
+  onDismiss={() => {}}
+/>
+
+
       <div className="max-w-6xl mx-auto">
         {/* Back Button & Header */}
         <div className="mb-8">
@@ -155,7 +170,7 @@ const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({
             <div key={stepNum} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
                 step >= stepNum 
-                  ? 'bg-gradient-to-r from-[#b68938] to-[#e1ba73] text-black shadow-lg' 
+                  ? 'bg-linear-to-r from-[#b68938] to-[#e1ba73] text-black shadow-lg' 
                   : 'bg-white/5 text-gray-400 border border-white/20'
               }`}>
                 {stepNum}
@@ -163,7 +178,7 @@ const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({
               {stepNum < 4 && (
                 <div className={`w-16 md:w-24 h-1 mx-2 ${
                   step > stepNum 
-                    ? 'bg-gradient-to-r from-[#b68938] to-[#e1ba73]' 
+                    ? 'bg-linear-to-r from-[#b68938] to-[#e1ba73]' 
                     : 'bg-white/10'
                 }`} />
               )}
@@ -289,7 +304,7 @@ const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({
                   </div>
 
                   {selectedPackage.originalPrice && (
-                    <div className="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-[#b68938]/20 to-[#e1ba73]/20 border border-[#b68938]/30 text-center">
+                    <div className="mt-4 px-4 py-2 rounded-lg bg-linear-to-r from-[#b68938]/20 to-[#e1ba73]/20 border border-[#b68938]/30 text-center">
                       <span className="text-[#e1ba73] font-bold text-sm">
                         Save {selectedPackage.originalPrice}
                       </span>
@@ -535,7 +550,7 @@ const PackageSelectionFlow: React.FC<PackageSelectionFlowProps> = ({
                     
                     <button
                       onClick={handleSubmit}
-                      className="px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest transition-all bg-gradient-to-r from-[#b68938] to-[#e1ba73] text-black hover:shadow-[0_0_30px_rgba(182,137,56,0.5)] hover:scale-105 active:scale-95"
+                      className="px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest transition-all bg-linear-to-r from-[#b68938] to-[#e1ba73] text-black hover:shadow-[0_0_30px_rgba(182,137,56,0.5)] hover:scale-105 active:scale-95"
                     >
                       Complete Order for {selectedPackage.price}
                     </button>

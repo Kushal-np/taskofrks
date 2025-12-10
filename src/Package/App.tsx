@@ -35,12 +35,14 @@ const App: React.FC = () => {
   const [hasRegistered, setHasRegistered] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, _setAuthMode] = useState<'login' | 'register'>('login');
+  const [showVerificationBanner, setShowVerificationBanner] = useState(false); // ADD THIS
 
   const [view, setView] = useState<View>('landing');
   const [selectedPackage, setSelectedPackage] = useState<PackageDetails | null>(null);
   const [checkoutUser, setCheckoutUser] = useState<UserDetails | null>(null);
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   console.log(checkoutUser);
+
   useEffect(() => {
     const registered = !!localStorage.getItem('srkgrow-hasregistered');
     setHasRegistered(registered);
@@ -51,6 +53,15 @@ const App: React.FC = () => {
       setView('dashboard');
     }
   }, []);
+
+  // ADD THIS EFFECT - Check verification status
+  useEffect(() => {
+    if (user && !user.approved) {
+      setShowVerificationBanner(true);
+    } else {
+      setShowVerificationBanner(false);
+    }
+  }, [user]);
 
   const handleUserUpdate = (userData: UserData | null) => {
     setUser(userData);
@@ -69,6 +80,7 @@ const App: React.FC = () => {
     setUser(null);
     localStorage.removeItem('srkgrow-activesession');
     setView('landing');
+    setShowVerificationBanner(false); // ADD THIS
   };
 
   const handlePackageSelect = (pkg: PackageDetails) => {
@@ -83,8 +95,6 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-
-
   const handleBackToLanding = () => {
     setView('landing');
     setSelectedPackage(null);
@@ -98,9 +108,10 @@ const App: React.FC = () => {
         user={user}
         onUserUpdate={handleUserUpdate}
         onDashboardClick={() => setView('dashboard')}
-
-
       />
+
+      {/* ADD VERIFICATION BANNER HERE - Right after Navbar */}
+
 
       <AnimatePresence>
         {showAuthModal && (
