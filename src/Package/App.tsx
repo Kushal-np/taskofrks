@@ -36,7 +36,7 @@ const App: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, _setAuthMode] = useState<'login' | 'register'>('login');
   const [showVerificationBanner, setShowVerificationBanner] = useState(false); // ADD THIS
-
+  console.log(showVerificationBanner);
   const [view, setView] = useState<View>('landing');
   const [selectedPackage, setSelectedPackage] = useState<PackageDetails | null>(null);
   const [checkoutUser, setCheckoutUser] = useState<UserDetails | null>(null);
