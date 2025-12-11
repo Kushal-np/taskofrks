@@ -10,6 +10,7 @@ import GrowVerificationPage from "./growonly/GrowVerification";
 import PackageSelectionPage from "./Package/App";
 import VerificationReviewPage from "./srktask/afterVerification/VerificationReviewPage";
 import UserDashboard from "./Package/components/dashboard/UserDashboard";
+import SRKGrowPortal from "./srkPanelView/Grow";
 const App: React.FC = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
@@ -27,6 +28,8 @@ const App: React.FC = () => {
         <Route path="/growVerification" element={<GrowVerificationPage/>}/>
         <Route path ="/underVerification" element={<VerificationReviewPage/>}/>
  <Route path="/userDashboard" element={<UserDashboard />} />
+
+    <Route path="/srkgrowview" element={<SRKGrowPortal/>}/>
       </Routes>
     </div>
   );
